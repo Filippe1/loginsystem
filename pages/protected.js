@@ -15,10 +15,15 @@ export async function getServerSideProps(context) {
 }
 
 export default function ProtectedPage({ user }) {
+  const handleLogout = async () => {
+    await fetch('/api/logout', { method: 'POST' });
+    window.location.href = '/login';
+  };
   return (
     <div>
       <h1>Welcome, {user.username}!</h1>
       <p>This is a protected page.</p>
+      <button onClick={handleLogout}>Logout</button>
     </div>
   );
 }
